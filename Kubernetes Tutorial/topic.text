@@ -1,0 +1,1001 @@
+আমি Kubernetes একদম basic/zero level থেকে advanced এবং production level পর্যন্ত শিখতে চাই।
+
+আমাকে একটি **complete, structured, topic-wise Kubernetes tutorial/course** হিসেবে শেখাও।
+
+আমার learning style:
+
+* আমি step-by-step শিখতে চাই।
+* প্রতিটি topic সহজ ভাষায় explain করবে।
+* প্রথমে **কেন দরকার**, তারপর **কী**, তারপর **কীভাবে কাজ করে**, তারপর **hands-on example** দেখাবে।
+* Docker/Linux/networking-এর সাথে Kubernetes-এর relationship explain করবে।
+* শুধু command মুখস্থ করাবে না; ভিতরে কী হচ্ছে সেটাও explain করবে।
+* প্রতিটি major topic শেষে practical exercise দেবে।
+* Beginner topic শেষ না করে advanced topic-এ jump করবে না।
+* যেখানে প্রয়োজন architecture diagram/text diagram ব্যবহার করবে।
+* Kubernetes-এর real-world production use case দিয়ে explain করবে।
+
+## LEVEL 0 — Prerequisites
+
+প্রথমে Kubernetes শেখার আগে যেসব foundation জানা দরকার সেগুলো শেখাও:
+
+### Linux
+
+* Linux filesystem
+* Process
+* PID
+* Signals
+* systemd
+* users/groups
+* permissions
+* environment variables
+* ports
+* sockets
+* logs
+* curl
+* wget
+* grep
+* awk
+* sed
+* netstat/ss
+* ps
+* top
+* journalctl
+* basic shell scripting
+
+### Networking
+
+* IP address
+* localhost
+* private/public IP
+* port
+* TCP/UDP
+* DNS
+* HTTP/HTTPS
+* request/response
+* reverse proxy
+* load balancer
+* NAT
+* firewall
+* subnet
+* CIDR
+
+### Docker
+
+* image
+* container
+* Dockerfile
+* volume
+* network
+* port mapping
+* environment variable
+* Docker Compose
+* container lifecycle
+* Docker image layers
+* registry
+
+প্রতিটি prerequisite-এর শেষে Kubernetes-এর সাথে relationship explain করবে।
+
+---
+
+# LEVEL 1 — Kubernetes Fundamentals / Low Level
+
+প্রথমে Kubernetes কী এবং কেন তৈরি হয়েছে সেটা শেখাও।
+
+Topics:
+
+1. What is Kubernetes?
+2. Why Kubernetes?
+3. Problems Kubernetes solves
+4. Container orchestration
+5. Kubernetes vs Docker
+6. Kubernetes vs Docker Compose
+7. Kubernetes architecture
+8. Cluster
+9. Node
+10. Control Plane
+11. Worker Node
+12. kube-apiserver
+13. etcd
+14. kube-scheduler
+15. kube-controller-manager
+16. kubelet
+17. kube-proxy
+18. Container Runtime
+19. Kubernetes API
+20. Desired State vs Current State
+21. Declarative configuration
+22. YAML basics for Kubernetes
+
+তারপর local Kubernetes setup:
+
+* kubectl
+* minikube
+* kind
+* Docker Desktop Kubernetes
+* kubectl context
+* cluster info
+* nodes
+* namespaces
+
+Basic commands শেখাও:
+
+```bash
+kubectl get
+kubectl describe
+kubectl create
+kubectl apply
+kubectl delete
+kubectl logs
+kubectl exec
+kubectl get events
+kubectl explain
+```
+
+---
+
+# LEVEL 2 — Basic Kubernetes Objects
+
+একটি object থেকে শুরু করে একে একে শেখাও:
+
+### Pod
+
+* Pod কী?
+* কেন container সরাসরি না চালিয়ে Pod?
+* Pod lifecycle
+* Pod phases
+* multi-container Pod
+* sidecar
+* init container
+* pod YAML
+
+### ReplicaSet
+
+* ReplicaSet কেন?
+* desired replicas
+* self-healing
+
+### Deployment
+
+* Deployment
+* ReplicaSet relationship
+* rolling update
+* rollback
+* revision
+* deployment strategy
+
+### Namespace
+
+* Namespace
+* default namespace
+* custom namespace
+* namespace isolation
+
+### Labels & Selectors
+
+* labels
+* selectors
+* matchLabels
+* matchExpressions
+
+### Annotation
+
+* Labels vs annotations
+
+প্রতিটি object-এর জন্য:
+
+```text
+Why?
+What?
+How?
+Architecture
+YAML
+kubectl commands
+Real-world example
+Common mistakes
+Troubleshooting
+Exercise
+```
+
+---
+
+# LEVEL 3 — Kubernetes Networking
+
+Networking খুব গভীরভাবে শেখাও।
+
+Topics:
+
+1. Pod IP
+2. Container networking
+3. Pod-to-Pod communication
+4. Node-to-Pod
+5. Pod-to-Service
+6. Service-to-Service
+7. ClusterIP
+8. NodePort
+9. LoadBalancer
+10. ExternalName
+11. kube-proxy
+12. DNS
+13. CoreDNS
+14. Service discovery
+15. Endpoints
+16. EndpointSlice
+17. NetworkPolicy
+18. Ingress
+19. Ingress Controller
+20. Gateway API
+21. Internal vs external traffic
+
+Hands-on:
+
+```text
+Client
+  ↓
+Ingress
+  ↓
+Service
+  ↓
+Pod
+```
+
+Explain exactly how the packet/request moves through each layer.
+
+---
+
+# LEVEL 4 — Configuration & Storage
+
+### ConfigMap
+
+* environment variables
+* mounted files
+* ConfigMap lifecycle
+
+### Secret
+
+* Secret
+* environment variable
+* volume mount
+* base64 misconception
+* Secret security
+
+### Storage
+
+* Volume
+* emptyDir
+* hostPath
+* PersistentVolume
+* PersistentVolumeClaim
+* StorageClass
+* dynamic provisioning
+* CSI
+* StatefulSet storage
+
+Explain:
+
+```text
+Pod
+ ↓
+PVC
+ ↓
+PV
+ ↓
+StorageClass
+ ↓
+Actual Storage
+```
+
+---
+
+# LEVEL 5 — Workloads
+
+Deeply learn:
+
+* Deployment
+* ReplicaSet
+* StatefulSet
+* DaemonSet
+* Job
+* CronJob
+* initContainers
+* sidecar containers
+
+Explain when to use:
+
+```text
+Deployment vs StatefulSet
+Deployment vs DaemonSet
+Job vs CronJob
+Pod vs Deployment
+```
+
+Give real-world examples.
+
+---
+
+# LEVEL 6 — Resource Management
+
+Topics:
+
+* CPU
+* Memory
+* requests
+* limits
+* QoS classes
+* LimitRange
+* ResourceQuota
+* OOMKilled
+* CPU throttling
+* scheduling based on resources
+
+Explain:
+
+```text
+request
+limit
+actual usage
+scheduler
+node capacity
+```
+
+with practical examples.
+
+---
+
+# LEVEL 7 — Scheduling
+
+Deeply explain Kubernetes scheduler.
+
+Topics:
+
+* scheduler
+* scheduling cycle
+* node selection
+* nodeSelector
+* node affinity
+* pod affinity
+* pod anti-affinity
+* taints
+* tolerations
+* topology spread constraints
+* priority
+* preemption
+
+Give real-world scenarios such as:
+
+* run workload only on SSD nodes
+* separate frontend/backend
+* keep replicas on different nodes
+* GPU workload
+* dedicated nodes
+
+---
+
+# LEVEL 8 — Health Checks & Reliability
+
+Topics:
+
+* livenessProbe
+* readinessProbe
+* startupProbe
+* health endpoints
+* graceful shutdown
+* terminationGracePeriodSeconds
+* preStop
+* SIGTERM
+* SIGKILL
+* restartPolicy
+
+Explain exactly what happens when:
+
+```text
+container crashes
+readiness fails
+liveness fails
+startup fails
+pod is deleted
+node goes down
+```
+
+---
+
+# LEVEL 9 — Security
+
+Teach Kubernetes security from fundamentals.
+
+Topics:
+
+* Authentication
+* Authorization
+* RBAC
+* Role
+* ClusterRole
+* RoleBinding
+* ClusterRoleBinding
+* ServiceAccount
+* Pod Security
+* SecurityContext
+* Linux capabilities
+* runAsUser
+* runAsNonRoot
+* readOnlyRootFilesystem
+* NetworkPolicy
+* Secrets
+* image security
+* admission control
+* Pod Security Standards
+
+Also explain common Kubernetes security mistakes.
+
+---
+
+# LEVEL 10 — Helm
+
+Teach Helm from zero.
+
+Topics:
+
+* Why Helm?
+* Chart
+* values.yaml
+* templates
+* helpers
+* release
+* repository
+* chart dependencies
+* conditions
+* loops
+* functions
+* Helm upgrade
+* rollback
+* Helm history
+* Helm secrets/configuration
+
+Create a real application Helm chart.
+
+---
+
+# LEVEL 11 — Observability
+
+Teach production monitoring.
+
+### Logs
+
+* kubectl logs
+* container logs
+* multi-container logs
+* centralized logging
+
+### Metrics
+
+* metrics-server
+* CPU/memory metrics
+* Kubernetes metrics API
+
+### Monitoring
+
+* Prometheus
+* Grafana
+
+### Tracing
+
+* OpenTelemetry
+* distributed tracing
+
+### Events
+
+* Kubernetes events
+* event troubleshooting
+
+Explain:
+
+```text
+Application
+ ↓
+Logs
+ ↓
+Metrics
+ ↓
+Traces
+ ↓
+Monitoring/Alerting
+```
+
+---
+
+# LEVEL 12 — Troubleshooting
+
+Create a dedicated Kubernetes troubleshooting course.
+
+Teach systematic debugging.
+
+Examples:
+
+### Pod not starting
+
+```bash
+kubectl get pods
+kubectl describe pod
+kubectl logs
+kubectl logs --previous
+kubectl get events
+```
+
+### CrashLoopBackOff
+
+### ImagePullBackOff
+
+### Pending Pod
+
+### OOMKilled
+
+### Service not reachable
+
+### DNS failure
+
+### Ingress not working
+
+### Readiness probe failure
+
+### Liveness probe failure
+
+### PVC Pending
+
+### Node NotReady
+
+### Deployment stuck
+
+For every issue teach:
+
+```text
+Symptom
+ ↓
+Possible causes
+ ↓
+Commands
+ ↓
+How to interpret output
+ ↓
+Fix
+ ↓
+Prevention
+```
+
+---
+
+# LEVEL 13 — Kubernetes Internals / Low-Level Deep Dive
+
+এখানে Kubernetes-এর ভিতরের implementation বুঝতে চাই।
+
+Topics:
+
+* Kubernetes API
+* REST API
+* API objects
+* etcd
+* controllers
+* reconciliation loop
+* controller pattern
+* scheduler internals
+* kubelet internals
+* container runtime
+* CRI
+* CNI
+* CSI
+* OCI
+* admission controllers
+* webhooks
+* informers
+* watches
+* resource version
+* leader election
+
+বিশেষভাবে explain করবে:
+
+```text
+kubectl apply
+      ↓
+API Server
+      ↓
+etcd
+      ↓
+Controller
+      ↓
+Scheduler
+      ↓
+Kubelet
+      ↓
+Container Runtime
+      ↓
+Container
+```
+
+প্রতিটি step-এ ভিতরে কী হয় তা explain করবে।
+
+---
+
+# LEVEL 14 — Custom Resources & Operators
+
+Topics:
+
+* CRD
+* Custom Resource
+* Controller
+* Operator pattern
+* reconciliation
+* finalizers
+* ownerReferences
+* garbage collection
+* admission webhook
+
+একটি simple custom operator-এর example দেখাবে।
+
+---
+
+# LEVEL 15 — Production Kubernetes
+
+Production architecture শেখাও।
+
+Topics:
+
+* multi-node cluster
+* high availability
+* control-plane HA
+* worker nodes
+* etcd backup
+* cluster upgrade
+* node drain
+* node cordon
+* rolling update
+* PodDisruptionBudget
+* autoscaling
+* Horizontal Pod Autoscaler
+* Vertical Pod Autoscaler
+* Cluster Autoscaler
+* capacity planning
+* resource planning
+
+Production architecture example:
+
+```text
+Users
+ ↓
+Cloud Load Balancer
+ ↓
+Ingress
+ ↓
+Kubernetes Services
+ ↓
+Deployments
+ ↓
+Pods
+ ↓
+Database / Redis / Queue
+```
+
+---
+
+# LEVEL 16 — CI/CD + Kubernetes
+
+Teach:
+
+* Git
+* Docker build
+* Docker registry
+* CI
+* CD
+* Kubernetes deployment
+* Helm deployment
+* GitHub Actions
+* GitLab CI
+* Argo CD
+* GitOps
+
+Create a complete pipeline:
+
+```text
+Git Push
+ ↓
+CI
+ ↓
+Test
+ ↓
+Docker Build
+ ↓
+Docker Registry
+ ↓
+Deploy
+ ↓
+Kubernetes
+ ↓
+Health Check
+```
+
+---
+
+# LEVEL 17 — Advanced Deployment Strategies
+
+Topics:
+
+* Rolling deployment
+* Recreate
+* Blue/Green
+* Canary
+* A/B testing
+* progressive delivery
+* Argo Rollouts
+
+Explain when each strategy is used.
+
+---
+
+# LEVEL 18 — Cloud Kubernetes
+
+After core Kubernetes, teach:
+
+* AWS EKS
+* Google GKE
+* Azure AKS
+* DigitalOcean Kubernetes
+
+Topics:
+
+* cloud load balancer
+* cloud storage
+* cloud networking
+* IAM integration
+* managed control plane
+* node groups
+* autoscaling
+
+---
+
+# LEVEL 19 — Advanced Networking
+
+Deep dive:
+
+* CNI
+* Calico
+* Cilium
+* eBPF
+* NetworkPolicy
+* service mesh
+* Istio
+* Envoy
+* mTLS
+* traffic management
+* ingress vs gateway
+* east-west traffic
+* north-south traffic
+
+Explain how packets actually move through the cluster.
+
+---
+
+# LEVEL 20 — Production Security & Reliability
+
+Topics:
+
+* zero trust
+* least privilege
+* secret management
+* Vault
+* external secrets
+* image scanning
+* supply-chain security
+* SBOM
+* admission policies
+* OPA
+* Kyverno
+* Pod Security
+* network segmentation
+* disaster recovery
+* backup/restore
+* etcd recovery
+
+---
+
+# LEVEL 21 — Real-World Projects
+
+After completing the theory, give me projects progressively.
+
+### Project 1
+
+Deploy a simple Nginx application.
+
+### Project 2
+
+Deploy:
+
+```text
+Frontend
+Backend
+Database
+Redis
+```
+
+### Project 3
+
+Deploy a Django/Laravel application.
+
+### Project 4
+
+Build:
+
+```text
+Ingress
+TLS
+Domain
+Backend
+Database
+Redis
+Celery/Worker
+CronJob
+```
+
+### Project 5
+
+Build a production-like Kubernetes environment with:
+
+```text
+Ingress
+TLS
+Multiple replicas
+HPA
+PDB
+ConfigMap
+Secret
+PVC
+Redis
+Database
+Monitoring
+Logging
+CI/CD
+Helm
+```
+
+### Project 6 — Production Simulation
+
+Give me a complete production incident and ask me to troubleshoot it.
+
+Examples:
+
+* Pod CrashLoopBackOff
+* Node NotReady
+* Database connection failure
+* DNS failure
+* Service unreachable
+* High CPU
+* OOMKilled
+* Ingress 502
+* TLS failure
+* PVC failure
+* deployment rollback
+
+Do not immediately give me the solution. First let me investigate using kubectl commands, then evaluate my troubleshooting approach.
+
+---
+
+# Teaching Format
+
+প্রতিটি topic এই format-এ শেখাবে:
+
+## 1. What?
+
+Concept কী?
+
+## 2. Why?
+
+কেন দরকার?
+
+## 3. Architecture
+
+ভিতরে কীভাবে কাজ করে?
+
+## 4. Example
+
+Real-world example।
+
+## 5. YAML
+
+সম্পূর্ণ working YAML।
+
+## 6. Commands
+
+প্রয়োজনীয় kubectl commands।
+
+## 7. Output
+
+Expected output এবং output কীভাবে বুঝব।
+
+## 8. Troubleshooting
+
+Common problems এবং debugging।
+
+## 9. Practice
+
+আমাকে একটি hands-on task দেবে।
+
+## 10. Quiz
+
+৫–১০টি প্রশ্ন করবে।
+
+## 11. Interview Questions
+
+এই topic থেকে interview-তে কী প্রশ্ন হতে পারে।
+
+## 12. Summary
+
+শেষে short summary দেবে।
+
+---
+
+# Important Rule
+
+আমি যখন কোনো command দিই, শুধু command-এর কাজ বলবে না।
+
+উদাহরণ:
+
+```bash
+kubectl apply -f deployment.yaml
+```
+
+এটার ক্ষেত্রে explain করবে:
+
+```text
+kubectl
+   ↓
+API Server
+   ↓
+Authentication
+   ↓
+Authorization
+   ↓
+Admission
+   ↓
+Object validation
+   ↓
+etcd
+   ↓
+Controller
+   ↓
+ReplicaSet
+   ↓
+Pod
+   ↓
+Scheduler
+   ↓
+Kubelet
+   ↓
+Container Runtime
+   ↓
+Container
+```
+
+অর্থাৎ **command চালানোর পর Kubernetes-এর ভিতরে কী ঘটে** সেটাও explain করবে।
+
+---
+
+# Final Goal
+
+এই course শেষ করার পরে আমি যেন:
+
+1. Kubernetes architecture explain করতে পারি
+2. নিজের হাতে cluster operate করতে পারি
+3. YAML লিখতে পারি
+4. application deploy করতে পারি
+5. networking troubleshoot করতে পারি
+6. storage configure করতে পারি
+7. RBAC/security বুঝতে পারি
+8. Helm ব্যবহার করতে পারি
+9. monitoring/logging setup করতে পারি
+10. production deployment করতে পারি
+11. Kubernetes issue troubleshoot করতে পারি
+12. Kubernetes internals বুঝতে পারি
+13. Docker → Kubernetes relationship বুঝতে পারি
+14. CI/CD + Kubernetes ব্যবহার করতে পারি
+15. cloud Kubernetes যেমন EKS/GKE/AKS বুঝতে পারি
+16. Kubernetes interview-এর technical questions answer করতে পারি
+
+সবচেয়ে গুরুত্বপূর্ণ: **Low Level → Basic → Mid → Intermediate → Advanced → Production** এই order maintain করবে।
+
+প্রথমে পুরো roadmap-এর একটি concise overview দাও, তারপর **LEVEL 0 থেকে Lesson 1 শুরু করো।**
